@@ -1,0 +1,6 @@
+\i sql/00_database_drop.sql
+\i sql/01_database.sql
+\i sql/02_refactoring_sales.sql
+\i sql/03_refactoring_city_transitional_period.sql
+\i sql/04_refactoring_city_result.sql
+\i sql/05_refactoring_indexes.sql

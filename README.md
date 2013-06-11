@@ -1,4 +1,5 @@
-database_refactoring
+Database Refactoring
 ====================
 
-Repositório com exemplos práticas de Database Refactorings
+Repositório com exemplos práticos de Database Refactorings utilizando
+PostgreSQL e PL/pgSQL.

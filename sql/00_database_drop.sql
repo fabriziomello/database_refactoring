@@ -7,3 +7,5 @@ DROP TABLE IF EXISTS DatabaseConfiguration;
 
 DROP SCHEMA IF EXISTS test CASCADE;
 
+DROP TABLE IF EXISTS databasechangelog;
+DROP TABLE IF EXISTS databasechangeloglock;

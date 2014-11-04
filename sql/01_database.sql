@@ -1,27 +1,12 @@
---
+-- 
 -- PostgreSQL database dump
---
-
+-- 
 SET client_encoding = 'LATIN1';
 SET standard_conforming_strings = off;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET escape_string_warning = off;
 
---
--- Name: plpgsql; Type: PROCEDURAL LANGUAGE; Schema: -; Owner: postgres
---
-
-CREATE PROCEDURAL LANGUAGE plpgsql;
-
-
-ALTER PROCEDURAL LANGUAGE plpgsql OWNER TO postgres;
-
-SET search_path = public, pg_catalog;
-
-SET default_tablespace = '';
-
-SET default_with_oids = true;
 
 --
 -- Name: customer; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
@@ -38,8 +23,6 @@ CREATE TABLE customer (
 );
 
 
-ALTER TABLE public.customer OWNER TO postgres;
-
 --
 -- Name: customer_code_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
@@ -50,8 +33,6 @@ CREATE SEQUENCE customer_code_seq
     NO MINVALUE
     CACHE 1;
 
-
-ALTER TABLE public.customer_code_seq OWNER TO postgres;
 
 --
 -- Name: customer_code_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -77,8 +58,6 @@ CREATE TABLE databaseconfiguration (
 );
 
 
-ALTER TABLE public.databaseconfiguration OWNER TO postgres;
-
 --
 -- Name: databaseconfiguration_schemaversion_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
@@ -89,8 +68,6 @@ CREATE SEQUENCE databaseconfiguration_schemaversion_seq
     NO MINVALUE
     CACHE 1;
 
-
-ALTER TABLE public.databaseconfiguration_schemaversion_seq OWNER TO postgres;
 
 --
 -- Name: databaseconfiguration_schemaversion_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -120,8 +97,6 @@ CREATE TABLE product (
 );
 
 
-ALTER TABLE public.product OWNER TO postgres;
-
 --
 -- Name: product_code_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
@@ -132,8 +107,6 @@ CREATE SEQUENCE product_code_seq
     NO MINVALUE
     CACHE 1;
 
-
-ALTER TABLE public.product_code_seq OWNER TO postgres;
 
 --
 -- Name: product_code_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -163,8 +136,6 @@ CREATE TABLE sales (
 );
 
 
-ALTER TABLE public.sales OWNER TO postgres;
-
 
 CREATE SEQUENCE sales_code_seq
     INCREMENT BY 1
@@ -172,8 +143,6 @@ CREATE SEQUENCE sales_code_seq
     NO MINVALUE
     CACHE 1;
 
-
-ALTER TABLE public.sales_code_seq OWNER TO postgres;
 
 --
 -- Name: customer_code_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -359,16 +328,6 @@ ALTER TABLE ONLY product
 
 ALTER TABLE ONLY sales
     ADD CONSTRAINT sales_pk PRIMARY KEY (code);
-
-
---
--- Name: public; Type: ACL; Schema: -; Owner: postgres
---
-
-REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM postgres;
-GRANT ALL ON SCHEMA public TO postgres;
-GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --

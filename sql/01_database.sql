@@ -335,4 +335,4 @@ ALTER TABLE ONLY sales
 --
 
 -- Import Epic Test Framework
---\i tests/epic/epic.sql
+\i tests/epic/epic.sql

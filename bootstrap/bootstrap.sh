@@ -1,14 +1,14 @@
 #!/bin/sh -e
 
 # Edit the following to change the name of the database user that will be created:
-APP_DB_USER=agilebrazil
-APP_DB_PASS=agilebrazil
+APP_DB_USER=xpconfbr
+APP_DB_PASS=xpconfbr
 
 # Edit the following to change the name of the database that is created (defaults to the user name)
 APP_DB_NAME=$APP_DB_USER
 
 # Edit the following to change the version of PostgreSQL that is installed
-PG_VERSION=9.3
+PG_VERSION=10
 
 ###########################################################
 # Changes below this line are probably not necessary
@@ -53,7 +53,7 @@ PG_REPO_APT_SOURCE=/etc/apt/sources.list.d/pgdg.list
 if [ ! -f "$PG_REPO_APT_SOURCE" ]
 then
   # Add PG apt repo:
-  echo "deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main" > "$PG_REPO_APT_SOURCE"
+  echo "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main" > "$PG_REPO_APT_SOURCE"
 
   # Add PGDG repo key:
   wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | apt-key add -
@@ -65,18 +65,26 @@ apt-get -y upgrade
 
 apt-get -y install "postgresql-$PG_VERSION" "postgresql-contrib-$PG_VERSION"
 
+# Locale settings
+echo "LC_ALL=en_US.UTF-8" >> /etc/environment
+
 PG_CONF="/etc/postgresql/$PG_VERSION/main/postgresql.conf"
 PG_HBA="/etc/postgresql/$PG_VERSION/main/pg_hba.conf"
 PG_DIR="/var/lib/postgresql/$PG_VERSION/main"
 
 # Edit postgresql.conf to change listen address to '*':
 sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/" "$PG_CONF"
+echo "log_line_prefix = '%t [%p]: [%l-1] db=%d,user=%u,app=%a,client=%h '" >> "$PG_CONF"
+echo "log_lock_waits = on" >> "$PG_CONF"
+echo "log_min_duration_statement = 0" >> "$PG_CONF"
+echo "log_connections = on" >> "$PG_CONF"
+echo "log_disconnections = on" >> "$PG_CONF"
 
 # Append to pg_hba.conf to add password auth:
 echo "host    all             all             all                     md5" >> "$PG_HBA"
 
 # Restart so that all new config is loaded:
-service postgresql restart
+systemctl restart postgresql
 
 cat << EOF | su - postgres -c psql
 -- Create the database user:
